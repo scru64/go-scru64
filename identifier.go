@@ -138,7 +138,7 @@ func (n *Id) UnmarshalText(text []byte) error {
 		} else if e < 0x80 {
 			return newParseError(fmt.Errorf("invalid digit %q at %d", e, i))
 		} else {
-			return newParseError(fmt.Errorf("found non-ASCII digit at %d", i))
+			return newParseError(fmt.Errorf("non-ASCII digit at %d", i))
 		}
 	}
 	*n = v
