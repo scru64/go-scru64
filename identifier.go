@@ -63,7 +63,7 @@ func FromUint(value uint64) (Id, error) {
 }
 
 // Returns the integer representation.
-func (n Id) Uint() uint64 {
+func (n Id) Num() uint64 {
 	n.verify()
 	return uint64(n)
 }

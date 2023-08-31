@@ -20,14 +20,14 @@ func TestEq(t *testing.T) {
 
 		assert(t, curr == twin)
 		assert(t, twin == curr)
-		assert(t, curr.Uint() == twin.Uint())
+		assert(t, curr.Num() == twin.Num())
 		assert(t, curr.String() == twin.String())
 		assert(t, curr.Timestamp() == twin.Timestamp())
 		assert(t, curr.NodeCtr() == twin.NodeCtr())
 
 		assert(t, curr != prev)
 		assert(t, prev != curr)
-		assert(t, curr.Uint() != prev.Uint())
+		assert(t, curr.Num() != prev.Num())
 		assert(t, curr.String() != prev.String())
 		assert(t, (curr.Timestamp() != prev.Timestamp()) ||
 			(curr.NodeCtr() != prev.NodeCtr()))
@@ -52,7 +52,7 @@ func TestOrd(t *testing.T) {
 		assert(t, curr > prev)
 		assert(t, curr >= prev)
 
-		assert(t, prev.Uint() < curr.Uint())
+		assert(t, prev.Num() < curr.Num())
 		assert(t, prev.String() < curr.String())
 
 		prev = curr
@@ -68,7 +68,7 @@ func TestConvertTo(t *testing.T) {
 	for _, e := range exampleIds {
 		x, _ = FromUint(e.num)
 
-		assert(t, x.Uint() == e.num)
+		assert(t, x.Num() == e.num)
 		assert(t, uint64(x) == e.num)
 		assert(t, int64(x) == int64(e.num))
 		assert(t, x.String() == e.text)
