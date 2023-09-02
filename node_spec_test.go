@@ -87,15 +87,17 @@ func TestConstructorError(t *testing.T) {
 // Supports serialization and deserialization.
 func TestNodeSpecSerDe(t *testing.T) {
 	var x, y, z NodeSpec
-	var buf []byte
+	var expected, actual []byte
 	var err error
 	for _, e := range exampleNodeSpecs {
 		x, _ = NewNodeSpecWithNodePrev(Id(e.nodePrev), e.nodeIdSize)
+		expected, err = json.Marshal(e.canonical)
+		assert(t, err == nil)
 
-		buf, err = json.Marshal(x)
-		assert(t, string(buf) == `"`+e.canonical+`"` && err == nil)
+		actual, err = json.Marshal(x)
+		assert(t, string(actual) == string(expected) && err == nil)
 
-		err = json.Unmarshal([]byte(`"`+e.canonical+`"`), &y)
+		err = json.Unmarshal(expected, &y)
 		assert(t, x == y && err == nil)
 
 		err = z.Scan(e.nodeSpec)

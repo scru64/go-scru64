@@ -155,20 +155,24 @@ func TestFromPartsError(t *testing.T) {
 	var err error
 	x, err = FromParts(max>>24, uint32(max&0xff_ffff)+1)
 	assert(t, x == 0 && err != nil)
+	x, err = FromParts((max>>24)+1, 0)
+	assert(t, x == 0 && err != nil)
 }
 
 // Supports serialization and deserialization.
 func TestSerDe(t *testing.T) {
 	var x, y Id
-	var buf []byte
+	var expected, actual []byte
 	var err error
 	for _, e := range exampleIds {
 		x, _ = FromUint(e.num)
+		expected, err = json.Marshal(e.text)
+		assert(t, err == nil)
 
-		buf, err = json.Marshal(x)
-		assert(t, string(buf) == `"`+e.text+`"` && err == nil)
+		actual, err = json.Marshal(x)
+		assert(t, string(actual) == string(expected) && err == nil)
 
-		err = json.Unmarshal([]byte(`"`+e.text+`"`), &y)
+		err = json.Unmarshal(expected, &y)
 		assert(t, x == y && err == nil)
 	}
 }
