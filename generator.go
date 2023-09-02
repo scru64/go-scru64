@@ -170,9 +170,6 @@ func (g *Generator) GenerateOrSleep() Id {
 // generator object should be protected from concurrent accesses using a mutex
 // or other synchronization mechanism to avoid race conditions.
 //
-// This method returns the [ErrClockRollback] error upon significant clock
-// rollback.
-//
 // This method panics if `unixTsMs` is not a positive integer within the valid
 // range.
 func (g *Generator) GenerateOrResetCore(
@@ -201,6 +198,9 @@ func (g *Generator) GenerateOrResetCore(
 // Unlike [Generator.Generate], this method is NOT thread-safe. The generator
 // object should be protected from concurrent accesses using a mutex or other
 // synchronization mechanism to avoid race conditions.
+//
+// This method returns the [ErrClockRollback] error upon significant clock
+// rollback.
 //
 // This method panics if `unixTsMs` is not a positive integer within the valid
 // range.
