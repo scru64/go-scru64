@@ -17,11 +17,13 @@ const nodeCtrSize uint8 = 24
 
 // Generates a new SCRU64 ID object using the global generator.
 //
-// The [GlobalGenerator] reads the node configuration from the
-// `SCRU64_NODE_SPEC` environment variable by default, and it panics if it fails
-// to read a well-formed node spec string (e.g., `"42/8"`, `"0xb00/12"`,
-// `"0u2r85hm2pt3/16"`) when a generator method is first called. See also
-// [NodeSpec] for the node spec string format.
+// By default, the global generator reads the node configuration from the
+// `SCRU64_NODE_SPEC` environment variable when a generator method is first
+// called, and it panics if it fails to do so. The node configuration is encoded
+// in a node spec string consisting of `nodeId` and `nodeIdSize` integers
+// separated by a slash (e.g., "42/8", "0xb00/12"; see [NodeSpec] for details).
+// You can configure the global generator differently by calling
+// `GlobalGenerator.Initialize()` before the default initializer is triggered.
 //
 // This function usually returns a value immediately, but if not possible, it
 // sleeps and waits for the next timestamp tick.
@@ -36,11 +38,13 @@ func New() Id {
 // Generates a new SCRU64 ID encoded in the 12-digit canonical string
 // representation using the global generator.
 //
-// The [GlobalGenerator] reads the node configuration from the
-// `SCRU64_NODE_SPEC` environment variable by default, and it panics if it fails
-// to read a well-formed node spec string (e.g., `"42/8"`, `"0xb00/12"`,
-// `"0u2r85hm2pt3/16"`) when a generator method is first called. See also
-// [NodeSpec] for the node spec string format.
+// By default, the global generator reads the node configuration from the
+// `SCRU64_NODE_SPEC` environment variable when a generator method is first
+// called, and it panics if it fails to do so. The node configuration is encoded
+// in a node spec string consisting of `nodeId` and `nodeIdSize` integers
+// separated by a slash (e.g., "42/8", "0xb00/12"; see [NodeSpec] for details).
+// You can configure the global generator differently by calling
+// `GlobalGenerator.Initialize()` before the default initializer is triggered.
 //
 // This function usually returns a value immediately, but if not possible, it
 // sleeps and waits for the next timestamp tick.

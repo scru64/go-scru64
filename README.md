@@ -22,8 +22,8 @@ os.Setenv("SCRU64_NODE_SPEC", "42/8")
 
 // generate a new identifier object
 x := scru64.New()
-fmt.Println(x)        // e.g., "0u2r85hm2pt3"
-fmt.Println(x.Uint()) // as a 64-bit unsigned integer
+fmt.Println(x)       // e.g., "0u2r85hm2pt3"
+fmt.Println(x.Num()) // as a 64-bit unsigned integer
 
 // generate a textual representation directly
 fmt.Println(scru64.NewString()) // e.g., "0u2r85hm2pt4"

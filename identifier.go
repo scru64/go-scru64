@@ -63,7 +63,7 @@ func FromUint(value uint64) (Id, error) {
 }
 
 // Returns the integer representation.
-func (n Id) Uint() uint64 {
+func (n Id) Num() uint64 {
 	n.verify()
 	return uint64(n)
 }
@@ -138,7 +138,7 @@ func (n *Id) UnmarshalText(text []byte) error {
 		} else if e < 0x80 {
 			return newParseError(fmt.Errorf("invalid digit %q at %d", e, i))
 		} else {
-			return newParseError(fmt.Errorf("found non-ASCII digit at %d", i))
+			return newParseError(fmt.Errorf("non-ASCII digit at %d", i))
 		}
 	}
 	*n = v
