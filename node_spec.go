@@ -20,12 +20,15 @@ var reNodeSpecHolder struct {
 // Represents a node configuration specifier used to build a [Generator].
 //
 // A `NodeSpec` is usually expressed as a node spec string, which starts with a
-// decimal `nodeId`, a hexadecimal `nodeId` prefixed with `"0x"`, or a 12-digit
+// decimal `nodeId`, a hexadecimal `nodeId` prefixed by "0x", or a 12-digit
 // `nodePrev` SCRU64 ID value, followed by a slash and a decimal `nodeIdSize`
-// value ranging from 1 to 23 (e.g., `"42/8"`, `"0xb00/12"`, `"0u2r85hm2pt3/16"`).
-// The first and second forms create a fresh new generator with the given
-// `nodeId`, while the third form constructs one that generates subsequent
-// SCRU64 IDs to the `nodePrev`.
+// value ranging from 1 to 23 (e.g., "42/8", "0xb00/12", "0u2r85hm2pt3/16"). The
+// first and second forms create a fresh new generator with the given `nodeId`,
+// while the third form constructs one that generates subsequent SCRU64 IDs to
+// the `nodePrev`. See also [the usage notes] in the SCRU64 spec for tips and
+// techniques to design node configurations.
+//
+// [the usage notes]: https://github.com/scru64/spec#informative-usage-notes
 type NodeSpec struct {
 	nodePrev   Id
 	nodeIdSize uint8
