@@ -144,6 +144,10 @@ func (g *Generator) Generate() (Id, error) {
 // generator upon significant timestamp rollback.
 //
 // See the [Generator] type documentation for the description.
+//
+// Note that this mode of generation is not recommended because rewinding
+// `timestamp` without changing `nodeId` considerably increases the risk of
+// duplicate results.
 func (g *Generator) GenerateOrReset() Id {
 	g.lock.Lock()
 	defer g.lock.Unlock()
@@ -171,6 +175,10 @@ func (g *Generator) GenerateOrSleep() Id {
 // resets the generator upon significant timestamp rollback.
 //
 // See the [Generator] type documentation for the description.
+//
+// Note that this mode of generation is not recommended because rewinding
+// `timestamp` without changing `nodeId` considerably increases the risk of
+// duplicate results.
 //
 // The `rollbackAllowance` parameter specifies the amount of `unixTsMs` rollback
 // that is considered significant. A suggested value is `10_000` (milliseconds).
