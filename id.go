@@ -100,7 +100,8 @@ func (n Id) Timestamp() uint64 {
 	return uint64(n) >> nodeCtrSize
 }
 
-// Returns the `nodeId` and `counter` field values combined as a single integer.
+// Returns the `nodeId` and `counter` field values combined as a single 24-bit
+// integer.
 func (n Id) NodeCtr() uint32 {
 	n.verify()
 	return uint32(n) & maxNodeCtr
